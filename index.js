@@ -4,11 +4,12 @@ const config = require('config');
 const buildApp = require('./src/app');
 const createConnection = require('./src/db/connection');
 
+
 async function run() {
     await createConnection();
     const PORT = config.get('app.port');
-    const dependencies = {};
-    const app = buildApp(dependencies);
+    // const dependencies = {};
+    const app = buildApp();
 
 
     app.listen(PORT, () => {

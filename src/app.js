@@ -1,18 +1,24 @@
 const express = require('express');
 const morgan = require('morgan');
+const socketio = require('socket.io');
+const http = require('http');
 const createError = require('http-errors');
 
 const router = require('./routers');
 
-function buildApp(dependencies) {
+function buildApp() {
     const app = express();
+
+    const server = http.createServer(app);
+    const socketServer = socketio(server);
+
 
     // Middlewares
     app.use(morgan('dev'));
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use((req, res, next) => {
-        req.dependencies = dependencies;
+        req.dependencies = { socketServer };
         next();
     })
 
@@ -25,6 +31,10 @@ function buildApp(dependencies) {
     });
 
     return app;
+
+
 }
+
+
 
 module.exports = buildApp;
