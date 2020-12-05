@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const createError = require('http-errors');
 
 const router = require('./routers');
 
@@ -17,6 +18,12 @@ function buildApp(dependencies) {
 
     // Routers
     app.use('/', router);
+
+    // catch 404 and forward to error handler
+    app.use(function (req, res, next) {
+        next(createError(404));
+    });
+
     return app;
 }
 

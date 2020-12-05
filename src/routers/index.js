@@ -1,9 +1,10 @@
 const express = require('express');
-
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({ message: 'Welcome' });
-})
+const home = require('../controllers/home');
+const dataBaseTest = require('../controllers/dataBaseTest');
+
+router.get('/', home);
+router.get('/db/test', dataBaseTest);
 
 module.exports = router;
