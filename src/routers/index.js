@@ -12,4 +12,10 @@ router.post('/transponder', function (req, res) {
     res.json({ message: 'OK' })
 })
 
+router.get('/socket-test', (req, res) => {
+    req.dependencies.socketServer.emit('sendMessageToAll', { message: 'COUCOU' });
+
+    res.json({ message: 'Welcome' });
+})
+
 module.exports = router;

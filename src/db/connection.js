@@ -16,7 +16,7 @@ const option = {
 async function createConnection() {
     try {
         const connection = await mongoose.connect(uriConnection, option);
-        console.log(`Database connection to ${DB_NAME} created`);
+        console.log(`*** Database connection to ${DB_NAME} created ***`);
         return connection;
     } catch (err) {
         console.log('ERROR during database connection', err);
