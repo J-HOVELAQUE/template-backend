@@ -8,9 +8,7 @@ const createConnection = require('./src/db/connection');
 async function run() {
     await createConnection();
     const PORT = config.get('app.port');
-    // const dependencies = {};
     const app = buildApp();
-
 
     app.listen(PORT, () => {
         console.log('SERVER STARTED ON:', PORT);
