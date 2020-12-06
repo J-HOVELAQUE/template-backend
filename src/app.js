@@ -1,17 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
-const socketio = require('socket.io');
 const http = require('http');
 const createError = require('http-errors');
 
 const router = require('./routers');
+const createSocketServer = require('./socketServer');
 
 function buildApp() {
     const app = express();
 
     const server = http.createServer(app);
-    const socketServer = socketio(server);
 
+    const socketServer = createSocketServer(server);
 
     // Middlewares
     app.use(morgan('dev'));
@@ -30,9 +30,7 @@ function buildApp() {
         next(createError(404));
     });
 
-    return app;
-
-
+    return server;
 }
 
 

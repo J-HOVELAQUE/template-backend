@@ -13,6 +13,7 @@ router.post('/transponder', function (req, res) {
 })
 
 router.get('/socket-test', (req, res) => {
+    console.log('Ma route')
     req.dependencies.socketServer.emit('sendMessageToAll', { message: 'COUCOU' });
 
     res.json({ message: 'Welcome' });
